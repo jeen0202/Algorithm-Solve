@@ -23,8 +23,7 @@
             "type": "shell",
             "command" : "python3",
             "args": [
-                "${file}",
-                "<",
+                "${file}",                
                 "${fileDirname}/input.txt"
             ],
             "group": "build",
