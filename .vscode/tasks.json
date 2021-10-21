@@ -1,0 +1,56 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        // {  GOLang을 위한 설정
+        //     "label": "build go",
+        //     "type": "shell",
+        //     "command": "go",
+        //     "args" :[
+        //         "run",
+        //         "${file}",
+        //         "<",
+        //         "${fileDirname}/input.txt"
+        //     ],
+        //     "group" : {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     }
+        // },
+        {
+            "label": "python",
+            "type": "shell",
+            "command" : "python3",
+            "args": [
+                "${file}",
+                "<",
+                "${fileDirname}/input.txt"
+            ],
+            "group": "build",
+            "problemMatcher":[]
+        },
+        {
+            "label": "C/C++ build and run active file",
+            "type" : "shell",
+            "command": "/usr/bin/g++",
+            "args" :[
+              //  "-std=c++17",
+              //  "-stdlib=libc++",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileBasenameNoExtension};",
+                "./${fileBasenameNoExtension}",
+               "<",
+                "${fileDirname}/input.txt;",
+                "/bin/rm",
+                "${fileBasenameNoExtension}"
+            ],
+            "problemMatcher":[
+                "$gcc"
+            ],
+            "group": "build"
+        }
+    ]
+}
