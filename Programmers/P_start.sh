@@ -10,3 +10,5 @@ def solution():
 if __name__ == '__main__':    
     print(solution())
 " > $1/$1.py
+
+touch $1/input.txt
