@@ -12,3 +12,9 @@ if __name__ == '__main__':
 " > $1/$1.py
 
 touch $1/input.txt
+
+echo "제목
+-----
+### 개요
+### 규칙
+### 매개변수 및 솔루션" > $1/README.md
