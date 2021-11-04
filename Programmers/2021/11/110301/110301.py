@@ -6,30 +6,23 @@ arr  = [list(map(str,input().split())) for _ in range(1)]
 
 def solution(expression):
     expression = str(expression)
-#    num = re.finditer('[/*+-]',expression)
     orders = list(permutations(['*','+','-'],3))
-    num = re.split('[*+-]',expression)
-    num = list(map(int,num))
     max = 0
     
-    #result = re.search(regex,expression)
-    #print(result.group())
     for order in orders:
-        temp_exp = expression
+        num = re.findall('[0-9]+',expression)
+        ops = re.findall('[*+-]+',expression) 
+         
         for exp in order:
-            regex = f"(\d+)\{exp}(\d+)|^-(\d+)\{exp}(\d+)"                        
-            while re.search(regex,temp_exp):                   
-                #regex = f"(\d+)\{exp}(\d+)|^-(\d+)\{exp}(\d+)"
-                temp = re.search(regex,temp_exp).group()                                       
-                temp_exp = temp_exp.replace(temp,str(eval(temp)),1)
-        temp_exp = int(temp_exp)
-        if temp_exp <0 :
-            temp_exp *= -1
-        if temp_exp > max :
-            max = temp_exp
-                          
+            while exp in ops:
+                index = ops.index(exp) 
+                if str(eval(num[index]+exp+num[index+1])) != 0:             
+                    num[index] =str(eval(num[index]+exp+num[index+1]))                                                   
+                del num[index+1] 
+                del ops[index]                                
+        if abs(int(num[0]))> max:
+            max = abs(int(num[0]))                          
     return max
 
 if __name__ == '__main__':    
     print(solution(arr[0][0]))
-
