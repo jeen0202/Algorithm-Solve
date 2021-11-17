@@ -13,9 +13,10 @@ def solution(info,query):
     print(info_table)    
     for item in query:
         item = item.replace('and',"")                       
-        query_table.append(item.split())   
+        query_table.append(item.split())  
+
     for query in query_table:
-        temp = []
+        temp = query_table[:]
         for i in range(len(query)):
             print(query[i])
             if i ==4:
@@ -26,8 +27,9 @@ def solution(info,query):
                 temp.append(count)
             elif query[i] == '-':
                 temp.append(len(info_table))                
-            else:                
-                temp.append(info_table.count(str(query[i])))        
+            else:
+                if temp.index(str(query[i]))                
+                temp.remove(str(query[i]))        
         print(temp)
         answer.append(min(temp))
     return answer
