@@ -1,7 +1,6 @@
 # import sys
 # sys.stdin = open(sys.argv[1],'r')
 # arr  = [list(map(자료형,input().split())) for _ in range(argv개수)]
-
 def solution(info,query):
     answer = []
     info_table = []
@@ -28,8 +27,8 @@ def solution(info,query):
             elif query[i] == '-':
                 temp.append(len(info_table))                
             else:
-                if temp.index(str(query[i]))                
-                temp.remove(str(query[i]))        
+                if temp.index(str(query[i]))  :              
+                    temp.remove(str(query[i]))        
         print(temp)
         answer.append(min(temp))
     return answer
