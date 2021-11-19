@@ -2,11 +2,14 @@ from itertools import combinations
 
 def solution(info,query):
     answer = []
+    # 가능한 query 조합저장을 위한 dict
     table = {}
     for item in info:
+        # dataset의 query부분과 점수 부분 분리
         conditions = item.split()[:-1]
         score = int(item.split()[-1])
         for n in range(5):
+            # query 조건의 범위를 반복하며 조건에 부합하는 query 생성
             combi = list(combinations(range(4),n))
             for c in combi:
                 t_c = conditions.copy()
@@ -17,17 +20,19 @@ def solution(info,query):
                     table[new_t_c].append(score)
                 else:
                     table[new_t_c] = [score]
-
+    # dataset 정렬
     for value in table.values():
         value.sort()
-
+    #검색 부분 세분화
     for item in query:
         item = [i for i in item.split() if i != 'and']                      
+        # 조건문과 점수부분 분리
         query_cnd = '/'.join(item[:-1])
         query_score = int(item[-1])
         if query_cnd in table:
             data = table[query_cnd]
             if len(data) >0:
+                # 조건과 일치하는 부분의 길이를 비교하여 검색
                 start, end = 0, len(data)
                 while start != end and start != len(data):
                     if data[(start+end) //2] >= query_score:
