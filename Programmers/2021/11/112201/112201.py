@@ -2,8 +2,7 @@ import sys
 sys.stdin = open(sys.argv[1],'r')
 arr  = input()
 
-from collections import deque
-code = {"[":"]","{":"}","(":")"}
+code = {"]":"[","}":"{",")":"("}
 
 def solution(s):
     if len(s) == 0 or len(s)%2 != 0:
@@ -11,17 +10,26 @@ def solution(s):
     keys = list(code.keys())
     answer=  0
         
-    for index in range(len(s)):       
-        temp = deque(list(s))
-        temp.rotate(-index)              
-        while len(temp)>0:
-            x = temp.popleft()            
+    for index in range(len(s)):            
+        temp = list(s[index:]+s[:index])        
+        top = len(temp)-1
+        #print(temp,top)                              
+        while top>=0:
+            x = temp.pop(top)
+            top-=1
+            print(x,list(temp))            
             if x not in keys or code[x] not in temp:
+                print('con1')
                 break
-            elif temp[0] in keys and temp[temp.index(code[x])-1] not in ["]","}",")"]:
+            y = code[x]
+            start = temp.index(y)
+            print(temp[start:])            
+            if temp[start:] in ["[","{","("]:
+                print('con2')
                 break               
             else:
-                temp.remove(code[x])                
+                temp.remove(code[x])
+                top-=1                
                 if len(temp) %2 != 0 :
                     break;
             if len(temp) == 0:
