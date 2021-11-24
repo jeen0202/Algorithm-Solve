@@ -22,9 +22,11 @@ def solution(s):
                 print('con1')
                 break
             y = code[x]
-            start = temp.index(y)
-            print(temp[start:])            
-            if temp[start:] in ["[","{","("]:
+            # 2차 조건 
+            for i in range(top,0,-1):
+                if temp[i] == y:
+                    start = i
+                    break            
                 print('con2')
                 break               
             else:
