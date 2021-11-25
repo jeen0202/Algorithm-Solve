@@ -28,19 +28,21 @@ def dijkstra(graph,max):
 
 def solution(N,road,K):    
     graph = {}    
-    temp = [{}for row in range(N)]
-    #for w in road:
+    temp = [{}for _ in range(N+1)]
     while road:
         w = road.pop(0)
-        points = w[:-1]
-        time = w[-1]
-        if max(points) in temp[min(points)-1].keys():            
-            temp[min(points)-1][max(points)]=min([temp[min(points)-1][max(points)],time])
+        point1,point2,time = w
+        if point1 in temp[point2].keys() or point2 in temp[point1].keys():
+            temp[point1][point2] = min([temp[point1][point2],time])
+            temp[point2][point1] = min([temp[point2][point1],time])
         else :
-            temp[min(points)-1][max(points)]=time
-    print(temp)
-    for index,item in enumerate(temp,1):                    
-        graph[index] = item    
+            temp[point1][point2] = time
+            temp[point2][point1] = time
+    #print(temp)
+    for index,item in enumerate(temp):
+        if index!=0:                    
+            graph[index] = item  
+    #print(graph)  
     return dijkstra(graph,K)
 
 if __name__ == '__main__':    
