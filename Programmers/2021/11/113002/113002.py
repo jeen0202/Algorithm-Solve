@@ -1,25 +1,19 @@
-from itertools import combinations
-import time
 def solution(number,k):    
     #start = time.time()
-    answer = ['0']
+    answer = []
     cnt = len(number)-k
     print(cnt)
     number = list(number)
     while number:
         i = number.pop(0)
         top = len(answer)
-        if len(answer) < cnt:
+        if cnt == len(number)+top:
             answer.append(i)            
         else :       
             while len(answer) and int(answer[-1])-int(i) <0:
                 answer.pop()
             if top > len(answer) or len(answer)<len(number)-k:
-                answer.append(i)
-       
-           
-            
-    #print(time.time()-start)         
+                answer.append(i)       
     return "".join(answer)
 if __name__ == '__main__':    
     print(solution("1924",2))
