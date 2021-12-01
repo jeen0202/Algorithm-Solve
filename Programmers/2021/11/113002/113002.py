@@ -2,18 +2,17 @@ def solution(number,k):
     #start = time.time()
     answer = []
     cnt = len(number)-k
-    print(cnt)
     number = list(number)
-    while number:
-        i = number.pop(0)
-        top = len(answer)
-        if cnt == len(number)+top:
-            answer.append(i)            
-        else :       
-            while len(answer) and int(answer[-1])-int(i) <0:
-                answer.pop()
-            if top > len(answer) or len(answer)<len(number)-k:
-                answer.append(i)       
+    answer.append(number.pop(0))
+    while number:        
+        top = len(answer)-1
+        temp = number.pop(0)
+        while len(answer) and int(answer[top]) < int(temp):
+            answer.pop()
+            top -= 1
+        answer.append(temp)
+        print(answer)
+        
     return "".join(answer)
 if __name__ == '__main__':    
     print(solution("1924",2))
@@ -27,6 +26,15 @@ if __name__ == '__main__':
     # temp = list(map(int,map("".join,combinations(number,len(number)-k))))
     # temp.sort(reverse=True)
     # return f"{temp[0]}"
-    # 시간초과 3
+    # 에러
+    # i = number.pop(0)
+    # top = len(answer)
+    # if cnt == len(number)+top:
+    #     answer.append(i)            
+    # else :       
+    #     while len(answer) and int(answer[-1])-int(i) <0:
+    #         answer.pop()
+    #     if top > len(answer) or len(answer)<len(number)-k:
+    #         answer.append(i)  
 
     
