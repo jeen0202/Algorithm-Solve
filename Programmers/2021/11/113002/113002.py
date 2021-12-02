@@ -1,24 +1,21 @@
 def solution(number,k):
     answer = []
-    cnt = len(number)-k
-    number = list(number)
-    answer.append(number.pop(0))
-    while number:
-        print(answer)        
-        top = len(answer)-1
-        temp = number.pop(0)
-        while len(answer) and int(answer[top]) < int(temp) and len(answer)+len(number)>=cnt:
+    for n in number :
+        if not answer :
+            answer.append(n)
+            continue
+        while answer and k >0 and answer[-1] < n:
             answer.pop()
-            top -= 1
-        answer.append(temp)
-        
-        
-        
+            k -= 1
+        answer.append(n)
+    if k>0:
+        return "".join(answer[:-k])    
     return "".join(answer)
 if __name__ == '__main__':    
     print(solution("1924",2))
     print(solution("1231234",3))
     print(solution("4177252841",4))
+    print(solution("99990",2))
 
     # 시간초과 2   
     # temp = list(map(int,map("".join,combinations(number,len(number)-k))))
