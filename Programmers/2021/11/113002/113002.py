@@ -1,17 +1,18 @@
-def solution(number,k):    
-    #start = time.time()
+def solution(number,k):
     answer = []
     cnt = len(number)-k
     number = list(number)
     answer.append(number.pop(0))
-    while number:        
+    while number:
+        print(answer)        
         top = len(answer)-1
         temp = number.pop(0)
-        while len(answer) and int(answer[top]) < int(temp):
+        while len(answer) and int(answer[top]) < int(temp) and len(answer)+len(number)>=cnt:
             answer.pop()
             top -= 1
         answer.append(temp)
-        print(answer)
+        
+        
         
     return "".join(answer)
 if __name__ == '__main__':    
