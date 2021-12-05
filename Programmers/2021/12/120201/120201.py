@@ -1,28 +1,20 @@
-from collections import deque
 
-def bfs(dungeons,start,k):
-    queue = deque([start])    
-    visited =[0 for _ in range(len(dungeons))]
-    if dungeons[start][0]>k:
-        return 0
-    visited[start] = True
-    k -= dungeons[start][1]
-    result = 1
-    while queue:
-        n = queue.popleft()
-        result+=1
-        for i,d in enumerate(dungeons):
-            if not visited[i] and d[0]<k:
-                k-=d[1]
-                queue.append(i)
-                visited[i] = True
-    return result
+answer = 0
+
+def dfs(dungeons,cnt,k,visited):    
+    global answer
+    if cnt > answer:
+        answer = cnt
+    for i in range(len(dungeons)):
+        if k>=dungeons[i][0] and not visited[i]:
+            visited[i] = 1
+            dfs(dungeons,cnt+1,k-dungeons[i][1],visited)
+            visited[i] = 0
+
 def solution(k,dungeons):
-    answer = []
-    dungeons.sort(key=lambda x : x[0],reverse=True)
-    for dungeon in dungeons:
-        answer.append(bfs(dungeons,dungeons.index(dungeon),k))  
-    return max(answer)        
+    visited = [0 for _ in range(len(dungeons))]      
+    dfs(dungeons,0,k,visited)
+    return answer     
 
 if __name__ == '__main__':    
     print(solution(80,[[80,20],[50,40],[30,10]]))
@@ -41,3 +33,21 @@ if __name__ == '__main__':
     #         answer +=1
     #     else:
     #         break 
+#2차 실패 - bfs
+# def bfs(dungeons,start,k):
+#     queue = deque([start])    
+#     visited =[0 for _ in range(len(dungeons))]
+#     if dungeons[start][0]>k:
+#         return 0
+#     visited[start] = True
+#     k -= dungeons[start][1]
+#     result = 1
+#     while queue:
+#         n = queue.popleft()
+#         result+=1
+#         for i,d in enumerate(dungeons):
+#             if not visited[i] and d[0]<k:
+#                 k-=d[1]
+#                 queue.append(i)
+#                 visited[i] = True
+#     return result
