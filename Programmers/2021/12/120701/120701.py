@@ -1,9 +1,23 @@
 def solution(m,n,board):
-    for i in range(m-1):
-        for j in range(n-1):
-            #print(board[i][j:j+2])
-            if board[i][j]==board[i][j+1] and board[i][j:j+2]==board[i+1][j:j+2]:
-                print(f'{i} {j}')
+    rows,transBoard = "",list()
+    
+    for i in range(n):
+        for j in range(m-1,-1,-1):
+            rows+=board[j][i]
+        transBoard.append(rows)        
+        rows=""
+    print(transBoard)
+    match = []
+    for i in range(n-1):
+        for j in range(m-1):
+            if transBoard[i][j]==transBoard[i][j+1] and transBoard[i][j:j+2]==transBoard[i+1][j:j+2]:
+                match.append((i,j))
+                match.append((i,j+1))
+                match.append((i+1,j))
+                match.append((i+1,j+1))
+                #print(f'{i} {j}')
+    match_clean = sorted(list(set(match)))
+    print(match_clean)
                 
 
 if __name__ == '__main__':    
