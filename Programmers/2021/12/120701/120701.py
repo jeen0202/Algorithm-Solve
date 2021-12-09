@@ -19,6 +19,7 @@ def solution(m,n,board):
                     #match.append((i+1,j+1))
                     #print(f'{i} {j}')
         match = sorted(list(set(match)),reverse=True)
+        print(match)
         if match == []:
             break
         for l in match:
