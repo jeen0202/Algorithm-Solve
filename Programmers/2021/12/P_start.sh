@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 mkdir $1
 echo "def solution():
         
