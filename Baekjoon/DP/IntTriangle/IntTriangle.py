@@ -13,7 +13,7 @@ def solution():
             elif j == i:
                 p[i][j] = p[i][j]+p[i-1][j-1]
             else :
-                p[i][j] = p[i][j] + max(p[i-1][j],p[j-1][j-1])                
-    print(p)
+                p[i][j] += max(p[i-1][j],p[i-1][j-1])                
+    print(max(p[N-1]))
 if __name__ == "__main__":
     solution()
