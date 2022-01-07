@@ -9,14 +9,13 @@ def solution():
     for _ in range(N):
         A.append(int(input()))
     A.reverse()
-    for coin in A:               
-        if K == 0:
-            print(coins)
-            break
+    for coin in A:
         if coin >K :
             continue
         coins += K//coin
         K = K%coin
+        if K == 0:
+            print(coins)
 
 if __name__ == "__main__":
     solution()
