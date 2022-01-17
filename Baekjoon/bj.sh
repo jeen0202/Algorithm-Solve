@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 mkdir $1/$2
 echo "import sys
 sys.stdin = open(".$1/$2/input.txt","r")
