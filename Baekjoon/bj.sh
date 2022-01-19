@@ -1,7 +1,7 @@
 #!/bin/zsh
 mkdir $1/$2
 echo "import sys
-sys.stdin = open(\"Baekjoon.$1/$2/input.txt\",\"r\")
+sys.stdin = open(\"Baekjoon/$1/$2/input.txt\",\"r\")
 
 " > $1/$2/$2.py
 
