@@ -30,6 +30,7 @@ def OneDay(x,y,day,visited=visited,Graph=Graph):
     return newT
 newT = 0
 while True:
+    check = len(visited)
     if remain == 0:
         print(0)
         break
@@ -37,10 +38,10 @@ while True:
         if Graph[x][y] == day:
             newT += OneDay(x,y,day)
     day+=1
+    if check == len(visited):
+        print(-1)
+        break
     if remain == newT:
         print(day-1)
-        break
-    if newT == 0:
-        print(-1)
         break
 
