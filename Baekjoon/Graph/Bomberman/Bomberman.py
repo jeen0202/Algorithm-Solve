@@ -22,7 +22,7 @@ def Check(Graph):
 def BFS(time,queue=queue,Graph=Graph):
     now = 0
     Check(Graph)
-    while time != now:
+    while time-1 != now:
         now+=1
         if now%2 == 0:
             while queue:
@@ -36,7 +36,7 @@ def BFS(time,queue=queue,Graph=Graph):
             Check(Graph)
         else:
             Graph = [['O' for _ in range(C)] for _ in range(R)]
-
-BFS(N)
+    return Graph
+Graph = BFS(N)
 for line in Graph:
     print("".join(line))
