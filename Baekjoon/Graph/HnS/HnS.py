@@ -2,28 +2,28 @@ import sys
 sys.stdin = open("Baekjoon/Graph/HnS/input.txt","r")
 from collections import deque
 n,k = map(int,input().split(" "))
-visited = [False for _ in range(100001)]
+visited = [-1 for _ in range(100001)]
 
 def bfs(start):
     q = deque()
     q.append(start)
-    visited[start[0]] = True
+    visited[start] = 0
     while q:
-        x,d = q.popleft()
+        x = q.popleft()
         if x == k :
+            print(visited[x])
             break
-        else :
-            if (0<= x*2 < 100000) and visited[x*2]==False:
-                visited[x*2] = True
-                q.append((x*2,d))
-            if (0<= x+1 < 100000) and visited[x+1]==False:
-                visited[x+1] = True
-                q.append((x+1,d+1))
-            if (0<= x-1 < 100000) and visited[x-1]==False:
-                visited[x-1] = True
-                q.append((x-1,d+1))
-    return d
-print(bfs((n,0)))
+        if (0<= x-1 <= 100000) and visited[x-1]==-1:
+            visited[x-1] = visited[x]+1
+            q.append(x-1)            
+        if (0<= x*2 <= 100000) and visited[x*2]==-1:
+            visited[x*2] = visited[x]
+            q.append(x*2)
+        if (0<= x+1 <= 100000) and visited[x+1]==-1:
+            visited[x+1] = visited[x]+1
+            q.append(x+1)
+
+bfs(n)
 
 def dfs(start):
     stack = []
