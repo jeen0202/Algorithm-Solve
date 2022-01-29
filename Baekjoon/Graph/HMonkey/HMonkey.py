@@ -5,35 +5,39 @@ k = int(input())
 w,h = map(int,input().split(" "))
 dd = [(-1,0),(1,0),(0,-1),(0,1)]
 kk = [(-2,-1),(-2,1),(-1,-2),(-1,2),(1,-2),(1,2),(2,-1),(2,1)]
-graph = []
+graph = [(list(map(int,input().split(" "))))for _ in range(h)]
 visited = [[-1 for _ in range(w)]for _ in range(h)]
-for _ in range(h):
-    graph.append(list(map(int,input().split(" "))))
 cnt = []
+if w == 1 and h == 1:
+    print(0)
+    exit()
 q = deque()
-q.append((0,0,0))
+q.append((0,0,0,k))
 visited[0][0] = 0
 while q:
-    x,y,z = q.popleft()
-    if (x,y) == (h-1,w-1) and z<=k:        
-        cnt.append(visited[x][y])
-    for i in range(4):
-        dx,dy = (sum(e) for e in zip(dd[i],(x,y)))
-        if 0<=dx < h and 0<= dy <w:
-            if visited[dx][dy] == -1 and graph[dx][dy] == 0:
-                visited[dx][dy] = visited[x][y] +1
-                q.append((dx,dy,z))
-    if z <k:
+    x,y,z,rk = q.popleft()
+    # if (x,y) == (h-1,w-1) and z<=k:        
+    #     cnt.append(visited[x][y])
+    if rk>=1:
         for j in range(8):
             kx,ky = x+kk[j][0],y+kk[j][1]
-            if 0<=kx<h and 0<= ky <w:
-                if visited[kx][ky] == -1 and graph[kx][ky] == 0:
-                    visited[kx][ky] = visited[x][y]+1
-                    q.append((kx,ky,z+1)) 
+            if 0<=kx<h and 0<= ky <w and graph[kx][ky] == 0:
+                if visited[kx][ky] == -1 or visited[kx][ky] < rk -1:
+                    if kx == h-1 and ky == w-1:
+                        print(z+1)
+                        exit()
+                    visited[kx][ky] = rk-1
+                    q.append((kx,ky,z+1,rk-1)) 
+    for i in range(4):
+        dx,dy = (sum(e) for e in zip(dd[i],(x,y)))
+        if 0<=dx < h and 0<= dy <w and graph[dx][dy] == 0:
+            if visited[dx][dy] == -1 or visited[dx][dy] < rk:
+                if dx == h-1 and dy == w-1:
+                    print(z+1)
+                    exit()                    
+                visited[dx][dy] = rk
+                q.append((dx,dy,z+1,rk))
 
-if len(cnt):
-    print(min(cnt))
-    exit()
 print(-1)
 
 for line in visited:
