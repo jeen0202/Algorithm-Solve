@@ -37,9 +37,9 @@ def game(coins):
             cl = to_arr(c)
             for dc in d:
                 cl[dc] = change(cl[dc])
-                if visited[to_int(cl)] == -1:
-                    visited[to_int(cl)] = visited[c]+1
-                    q.append(to_int(cl))
+            if visited[to_int(cl)] == -1:
+                visited[to_int(cl)] = visited[c]+1
+                q.append(to_int(cl))
     return -1
 
 
