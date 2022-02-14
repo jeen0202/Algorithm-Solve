@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Launch PDG",
+      "request": "launch",
+      "mainClass": "Baekjoon.BruteForce.PDG.PDG",
+      "projectName": "Algorithm-Solve_da51f6d8"
+    },
+    {
       "name": "Python: Current File",
       "type": "python",
       "request": "launch",
