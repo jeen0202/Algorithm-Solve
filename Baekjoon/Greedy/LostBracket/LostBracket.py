@@ -1,23 +1,15 @@
 import sys
 sys.stdin = open("Baekjoon/Greedy/LostBracket/input.txt","r")
-n = list(input())
-flag = False
-
-for i in range(len(n)):
-    if not flag and n[i] == '-':
-        n.insert(i+1,'(')
-        flag = not flag
-    if flag and n[i+1] == '-':
-        n.insert(i+1,')')
-    # if n[i] in ["-","+"]:
-    #     if not flag and n[i] == '-':
-    #         n.insert(i+1,'(')
-    #     else:
-    #         n.insert(i+1,')')
-    #     flag = not flag
-
-if flag:
-    n.append(")")
-print(n)
-print(eval("".join(n)))
+n = list(input().split('-'))
+box = []
+for i in n:
+    plus = 0
+    s = i.split('+')
+    for j in s:
+        plus += int(j)
+    box.append(plus)
+ans = box[0]
+for k in range(1,len(box)):
+    ans -= box[k]
+print(ans)
 
