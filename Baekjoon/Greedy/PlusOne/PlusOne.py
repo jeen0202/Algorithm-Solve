@@ -1,6 +1,7 @@
 
 import sys
 sys.stdin = open("Baekjoon/Greedy/PlusOne/input.txt","r")
+input = sys.stdin.readline
 n = int(input())
 products = [int(input())for _ in range(n)]
 products.sort(reverse=True)
