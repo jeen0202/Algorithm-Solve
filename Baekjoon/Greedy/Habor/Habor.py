@@ -12,11 +12,13 @@ if max(crains) < max(boxes):
     print(-1)
     exit()
 ans = 0
-while sum(moved)!=m:
+while sum(moved) !=m:
+    cnt=0
     for i in range(n):
-        for j in range(m):
-            if moved[j]==0 and crains[i] >= boxes[j]:
-                 moved[j] = 1
+        for j in range(cnt,m):
+            if moved[j] == 0 and crains[i] >= boxes[j]:
+                 moved[j]+=1
                  break
+            cnt+=1
     ans +=1
 print(ans)
