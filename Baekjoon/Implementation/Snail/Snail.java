@@ -2,14 +2,14 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import java.util.StringTokennizer;
 
 public class Snail{
     public static int[][] graph;
     public static void main(String[] agrs) throws IOException{
         System.setIn(new FileInputStream("Baekjoon/Implementation/Snail/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        //StringTokenizer st = new StringTokenizer(br.readLine(), );
+        StringBuilder sb = new StringBuilder();
+
         int n = Integer.parseInt(br.readLine());
         int m = Integer.parseInt(br.readLine());
         int max  = n*n;
@@ -17,26 +17,23 @@ public class Snail{
         int[] dy = {0,1,0,-1};
         int ax = 0,ay = 0;
         graph = new int[n][n];
-        for (int i = 0; i < n/2+1; i++) {
-            int r = i;
-            int c = i;
-            int idx = 0;
-
+        for (int i = 0;i<(n/2)+1;i++){
+            int idx =0;
+            int x = i;
+            int y = i;
             graph[i][i] = max--;
-
-            while(idx <4){
-                int rr = r + dx[idx];
-                int cc = c + dy[idx];
-
-                if(rr< 0 || rr >=n|| cc >= n || cc <0){
+            while(idx<4){
+                int x2 = x + dx[idx];
+                int y2 = y + dy[idx];
+                if(x2<0 || x2>= n ||y2<0 || y2 >=n){
                     idx++;
-                }else if(graph[rr][cc] != 0){
+                }else if(graph[x2][y2]!=0){
                     idx++;
                 }else{
-                    graph[rr][cc] = max--;
-                    r = rr;
-                    c = cc;
-                }
+                    graph[x2][y2] = max--;
+                    x = x2;
+                    y = y2;
+                }                
             }
         }
         for (int i = 0; i < n; i++) {
@@ -45,11 +42,12 @@ public class Snail{
                     ax = i+1;
                     ay = j+1;
                 }
-                System.out.print(graph[i][j]+" ");        
+                sb.append(graph[i][j] + " ");      
             }
-            System.out.println();
+            sb.append("\n");
         }
-        System.out.println(ax+" "+ay);
+        sb.append(ax+" "+ay);
+        System.out.println(sb);
+        br.close();
     }
 }
-
