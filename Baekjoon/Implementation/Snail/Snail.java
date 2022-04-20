@@ -8,16 +8,22 @@ public class Snail{
     public static void main(String[] agrs) throws IOException{
         System.setIn(new FileInputStream("Baekjoon/Implementation/Snail/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //Buffer에 저장하여 한번에 출력(시간 절약)
         StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
         int m = Integer.parseInt(br.readLine());
+        //(1,1)에서 시작 => 최대값 출력
         int max  = n*n;
+        // 반시계방향으로 전환하며 출력
         int[] dx = {1,0,-1,0};
         int[] dy = {0,1,0,-1};
-        int ax = 0,ay = 0;
+        // N x N 배열로 초기화
+        int ax = 0;
+        int ay = 0;
         graph = new int[n][n];
         for (int i = 0;i<(n/2)+1;i++){
+            //
             int idx =0;
             int x = i;
             int y = i;
