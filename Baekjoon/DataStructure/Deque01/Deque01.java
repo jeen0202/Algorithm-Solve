@@ -2,8 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class Deque01{    
@@ -11,26 +12,30 @@ public class Deque01{
         System.setIn(new FileInputStream("Baekjoon/DataStructure/Deque01/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        Deque<Integer> dq = new ArrayDeque<Integer>();
+        List<Integer> dq = new ArrayList<Integer>();
         int n = Integer.parseInt(br.readLine());
         for(int i = 0 ; i < n ; i++){
-            String line = br.readLine();
-            String keyword = line.split(" ")[0];
+            StringTokenizer  st = new StringTokenizer(br.readLine());
+            String keyword = st.nextToken();
             if(keyword.equals("push_front")){
-                dq.addFirst(Integer.parseInt(line.split(" ")[1]));
+                dq.add(0, Integer.parseInt(st.nextToken()));
             }else if(keyword.equals("push_back")){
-                dq.addLast(Integer.parseInt(line.split(" ")[1]));
+                dq.add(dq.size(),Integer.parseInt(st.nextToken()));
             }else if(keyword.equals("pop_front")){
                 if(dq.isEmpty())
-                    sb.append((-1+"\n"));
+                    sb.append(("-1\n"));
                 else{
-                    sb.append((dq.removeFirst())+"\n");
+                    sb.append(dq.get(0));
+                    sb.append("\n");
+                    dq.remove(0);
                 }
             }else if(keyword.equals("pop_back")){
                 if(dq.isEmpty())
-                    sb.append((-1+"\n"));
+                    sb.append(("-1\n"));
                 else{
-                    sb.append((dq.removeLast())+"\n");
+                    sb.append(dq.get(dq.size()-1));
+                    sb.append("\n");
+                    dq.remove(dq.get(dq.size()-1));
                 }
             }else if(keyword.equals("size")){
                 sb.append((dq.size())+"\n");
@@ -39,15 +44,17 @@ public class Deque01{
             }
             else if(keyword.equals("front")){
                 if(dq.isEmpty())
-                    sb.append((-1+"\n"));
+                    sb.append("-1\n");
                 else{
-                    sb.append((dq.getFirst())+"\n");
+                    sb.append(dq.get(0));
+                    sb.append("\n");
                 }
             }else if(keyword.equals("back")){
                 if(dq.isEmpty())
-                    sb.append((-1+"\n"));
+                    sb.append("-1\n");
                 else{
-                    sb.append((dq.getLast())+"\n");
+                    sb.append(dq.get(dq.size()-1));
+                    sb.append("\n");
                 }
             }
         }
